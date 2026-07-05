@@ -1,0 +1,309 @@
+<!DOCTYPE html> <!-- تعريف نوع المستند HTML5 -->
+<html lang="en"> <!-- بداية صفحة HTML واللغة انجليزية -->
+<head>
+  <meta charset="UTF-8"> <!-- ترميز الحروف UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- عشان الصفحة تبقى Responsive على الموبايل -->
+  <title>Meeting Room</title> <!-- عنوان الصفحة في المتصفح -->
+
+  <!-- استدعاء أيقونات Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* استدعاء خط Cairo من جوجل */
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+
+    /* إعدادات أساسية للصفحة */
+    body {
+      margin: 0; /* إزالة الهوامش */
+      padding: 0;
+      font-family: 'Cairo', sans-serif; /* خط الكتابة */
+      color: #FFFFFF; /* لون النص */
+      background: linear-gradient(-45deg, #7e2828, #1E2435, #921e24, #E6E6E6); /* خلفية متدرجة */
+      background-size: 400% 400%;
+      animation: gradientFlow 10s ease infinite; /* أنيميشن لحركة الخلفية */
+      min-height: 100vh; /* طول الصفحة كامل */
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden; /* منع التمرير العرضي */
+    }
+
+    /* حركة الخلفية */
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* الهيدر */
+    header {
+      width: 100%;
+      height: 80px;
+      background: #e6e6e6; /* لون الهيدر */
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2); /* ظل خفيف للهيدر */
+      position: fixed; /* يفضل ثابت أعلى الصفحة */
+      top: 0;
+      z-index: 1000; /* يبقى فوق أي عنصر */
+    }
+
+    header img {
+      height: 75px; /* طول اللوجو */
+      width: auto;
+    }
+
+    /* أزرار الهيدر */
+    .header-buttons {
+      display: flex;
+      gap: 10px;
+      margin-left: 800px; /* مسافة بين اللوجو والأزرار على الكمبيوتر */
+    }
+
+    .header-buttons a {
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      background: #B22222; /* لون الخلفية */
+      color: #E6E6E6; /* لون النص */
+      font-weight: bold;
+      transition: 0.3s ease; /* تأثير ناعم عند الهوفر */
+    }
+
+    .header-buttons a:hover {
+      background: #E6E6E6;
+      color: #B22222;
+      transform: scale(1.05); /* تكبير بسيط */
+    }
+
+    /* لينك LinkedIn */
+    .linkedin-link {
+      text-decoration: none;
+      color: #0A66C2;
+    }
+    .linkedin-link:hover {
+      text-decoration: underline;
+      color: #0A66C2;
+    }
+
+    /* الهيرو Section */
+    .hero {
+      height: 25vh; /* ارتفاع */
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-top: 80px; /* عشان يسيب مكان للهيدر الثابت */
+    }
+
+    /* خلفية الهيرو (بلور) */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url("home/صوره لمدينه المعرفه.jpg") center/cover no-repeat;
+      filter: blur(6px) brightness(0.5); /* بلور + تغميق */
+      z-index: 0;
+      border-radius: 15px;
+    }
+
+    /* النصوص في الهيرو */
+    .hero h1, .hero p {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+    }
+
+    .hero h1 {
+      font-size: 2.5em;
+      color: #FFFFFF;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.5); /* ظل للنص */
+    }
+
+    .hero p {
+      font-size: 1em;
+      margin-top: 5px;
+      color: #E6E6E6;
+    }
+
+    /* شبكة الغرف */
+    .rooms {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 أعمدة */
+      gap: 20px; /* مسافات بين الكروت */
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    /* موبايل: الغرف عمود واحد */
+    @media (max-width: 768px) {
+      .rooms {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* الكارت بتاع كل غرفة */
+    .room {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    .room:hover {
+      transform: scale(1.03);
+      background: rgba(255,255,255,0.2);
+    }
+    .room img {
+      width: 100%; /* الصورة تاخد العرض بالكامل */
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .room h2 {
+      color: #E6E6E6;
+      margin-bottom: 10px;
+    }
+    .room a {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #E6E6E6;
+      color: #B22222;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease;
+    }
+    .room a:hover {
+      background: #B22222;
+      color: #E6E6E6;
+      transform: scale(1.05);
+    }
+
+    /* الفوتر */
+    footer {
+      width: 100%;
+      background: #e6e6e6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+      font-weight: 600;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.2); /* ظل فوق */
+      margin-top: auto;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    footer small {
+      display: block;
+      font-size: 0.8em;
+      color: #555;
+      margin-top: 2px;
+    }
+
+    /* تعديل شكل الأزرار على الموبايل */
+    @media (max-width: 768px) {
+      .header-buttons {
+        margin-left: 10px; /* تقليل المسافة */
+        gap: 5px;
+        flex-wrap: wrap; /* الأزرار تتكسر على سطر تاني */
+      }
+      .header-buttons a {
+        padding: 5px 10px;
+        font-size: 0.8em;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- الهيدر -->
+  <header>
+    <div class="logo">
+      <img src="home/itida-eme1.png" alt="Logo"> <!-- صورة اللوجو -->
+    </div>
+    <div class="header-buttons">
+      <a href="home.html">Back to Home</a> <!-- زر الرجوع للصفحة الرئيسية -->
+      <a href="common.html">Common Room</a> <!-- زر للـ Common Room -->
+    </div>
+  </header>
+
+  <!-- الهيرو -->
+  <div class="hero">
+    <div class="hero-bg"></div> <!-- خلفية بلور -->
+    <h1>MEETING ROOM</h1> <!-- عنوان الصفحة -->
+    <p>Join and reserve meeting rooms at Imhotep I&D Center</p> <!-- وصف قصير -->
+  </div>
+
+  <!-- قائمة الغرف -->
+  <div class="rooms">
+    <!-- غرفة 1 -->
+    <div class="room">
+      <img src="meeting_room/meeting1.jpg" alt="Room 1">
+      <h2>Room 1</h2>
+      <h3>Ground Floor</h3>
+      <a href="https://calendar.app.google/8j5KHroXHU3c3a6W6">Reserve</a>
+    </div>
+
+    <!-- غرفة 2 -->
+    <div class="room">
+      <img src="meeting_room/meeting2.jpg" alt="Room 2">
+      <h2>Room 2</h2>
+      <h3>First Floor</h3>
+      <a href="https://calendar.app.google/BXSKSfgsZCNNHQ9BA">Reserve</a>
+    </div>
+
+    <!-- غرفة 3 -->
+    <div class="room">
+      <img src="meeting_room/meeting3.jpg" alt="Room 3">
+      <h2>Room 3</h2>
+      <h3>First Floor</h3>
+      <a href="https://calendar.app.google/sXZXxarW8wxxB52h9">Reserve</a>
+    </div>
+
+    <!-- غرفة 4 -->
+    <div class="room">
+      <img src="meeting_room/meeting4.jpg" alt="Room 4">
+      <h2>Room 4</h2>
+      <h3>Second Floor</h3>
+      <a href="#">Reserve</a>
+    </div>
+
+    <!-- غرفة 5 -->
+    <div class="room">
+      <img src="meeting_room/meeting5.jpg" alt="Room 5">
+      <h2>Room 5</h2>
+      <h3>Second Floor</h3>
+      <a href="#">Reserve</a>
+    </div>
+
+    <!-- غرفة 6 -->
+    <div class="room">
+      <img src="meeting_room/meeting6.jpg" alt="Room 6">
+      <h2>Room 6</h2>
+      <h3>Second Floor</h3>
+      <a href="#">Reserve</a>
+    </div>
+  </div>
+
+  <!-- الفوتر -->
+  <footer>
+    © 2025 Imhotep Innovation & Development Center
+    <small>This website was developed as part of an internship at ITIDA</small>
+    <small>Developed by Seif EL-Den Tamer</small>
+    <small>
+      <!-- لينك LinkedIn مع أيقونة -->
+      <a href="https://www.linkedin.com/in/seif-el-den-tamer-342001347?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" 
+         target="_blank"  
+         class="linkedin-link">
+         <i class="fab fa-linkedin" style="color:#0A66C2; font-size:16px; margin-right:5px;"></i>
+        Seif EL-Den Tamer
+      </a>
+    </small>
+  </footer>
+
+</body>
+</html>

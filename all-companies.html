@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Companies</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Cairo', sans-serif;
+  color: #FFFFFF;
+  background: linear-gradient(-45deg, #7e2828, #1E2435, #921e24, #E6E6E6);
+  background-size: 400% 400%;
+  animation: gradientFlow 10s ease infinite;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* الهيدر */
+header {
+  width: 100%;
+  height: 80px;
+  background: #e6e6e6;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+header img {
+  height: 75px;
+  width: auto;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 20px;
+  margin-left: auto; /* الأزرار تروح على اليمين */
+  margin-right: 30px; /* تبعد عن اليمين شويه */
+}
+
+.header-buttons a {
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  background: #B22222;
+  color: #E6E6E6;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+.header-buttons a:hover {
+  background: #E6E6E6;
+  color: #B22222;
+  transform: scale(1.05);
+}
+
+.linkedin-link {
+  text-decoration: none;
+  color: #0A66C2;
+}
+.linkedin-link:hover {
+  text-decoration: underline;
+  color: #0A66C2;
+}
+
+/* الهيرو */
+.hero {
+  height: 25vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 80px; /* تحت الهيدر */
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url("home/صوره لمدينه المعرفه.jpg") center/cover no-repeat;
+  filter: blur(6px) brightness(0.5);
+  z-index: 0;
+  border-radius: 15px;
+}
+
+.hero h1, .hero p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+.hero h1 {
+  font-size: 2.5em;
+  color: #FFFFFF;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+}
+
+.hero p {
+  font-size: 1em;
+  margin-top: 5px;
+  color: #E6E6E6;
+}
+
+/* شبكة الشركات */
+.companies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.company-card {
+  background: rgba(255,255,255,0.1);
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+  transition: transform 0.3s ease, background 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.company-card:hover {
+  transform: scale(1.03);
+  background: rgba(255,255,255,0.2);
+}
+.company-card img {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  margin: 0 auto 15px;
+  border-radius: 10px;
+}
+.company-card p {
+  color: #f1f1f1;
+  line-height: 1.6;
+  font-size: 14px;
+  margin-bottom: 15px;
+  flex-grow: 1;
+}
+.company-card a {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: bold;
+  color: #0A66C2;
+  background: #e8f4fc;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.company-card a:hover {
+  background: #0A66C2;
+  color: #fff;
+}
+
+/* الفوتر */
+footer {
+  width: 100%;
+  background: #e6e6e6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  font-weight: 600;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+  margin-top: auto;
+  padding: 10px 0;
+  text-align: center;
+}
+
+footer small {
+  display: block;
+  font-size: 0.8em;
+  color: #555;
+  margin-top: 2px;
+}
+
+/* ======== موبايل كامل ======== */
+@media (max-width: 768px) {
+
+  /* كل محتوى الصفحة ما عدا الهيدر والفوتر */
+  body > *:not(header):not(footer) {
+    display: flex;
+    flex-direction: column;   /* كل شيء تحت بعض */
+    align-items: center;      /* توسيط المحتوى */
+    width: 100%;              /* عرض الشاشة كله */
+    max-width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    gap: 20px;
+  }
+
+  /* الأقسام النصية والفيديوهات */
+  .section, .video-block, .text {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+  }
+
+  /* الصور والفيديوهات */
+  .video-block video, img, iframe {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  }
+
+  /* الشركات */
+  .company-container {
+    flex-direction: column;   /* الشركات تحت بعض */
+    width: 100%;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .company {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    padding: 15px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px) saturate(160%);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    transition: transform 0.3s ease;
+  }
+
+  .company:hover {
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  .company img {
+    max-width: 120px;
+    margin: 0 auto 12px;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+  }
+
+  .company p {
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #e0e0e0;
+  }
+
+  /* الأزرار */
+  .buttons, .buttons a, .company-header button, .visit-all-btn {
+    width: 100%;
+    max-width: 300px;
+    margin: 12px auto;
+    display: block;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 1em;
+  }
+
+  /* العناوين */
+  h1, h2, h3, h4 {
+    width: 100%;
+    text-align: center;
+  }
+
+  .text h1, .text h4 {
+    font-size: 1.2em;
+    text-align: center;
+  }
+
+  /* الهيرو */
+  .hero {
+    height: auto;
+    padding: 20px 10px;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 0 40px rgba(255,255,255,0.15);
+  }
+
+  .hero h1 {
+    font-size: 2em;
+  }
+
+  .hero p {
+    font-size: 1em;
+  }
+
+  /* الشركات */
+  .company-header {
+    text-align: center;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .company-header h2 {
+    font-size: 20px;
+    animation: fadeDown 0.8s ease;
+  }
+
+  .company-header button {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px 0;
+  }
+
+  /* الأسهم فوق السلايدر فقط على الموبايل */
+  .company-slider {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 20px auto 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .arrow {
+    position: absolute;
+    top: -35px;          /* فوق السلايدر */
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+    font-size: 22px;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.3s, transform 0.15s;
+    z-index: 10;
+  }
+
+  .arrow.left  { left: 10px; }
+  .arrow.right { right: 10px; }
+
+  .arrow:hover { background: rgba(255,255,255,0.4); }
+  .arrow:active { transform: scale(0.95); }
+}
+
+
+
+</style>
+</head>
+<body>
+
+<!-- الهيدر -->
+<header>
+  <div class="logo">
+    <img src="home/itida-eme1.png" alt="Logo">
+  </div>
+  <div class="header-buttons">
+    <a href="home.html">Back to Home</a>
+  </div>
+</header>
+
+<!-- الهيرو -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <h1>Companies</h1>
+  <p>Discover innovative startups inside Imhotep I&D Center</p>
+</div>
+
+<!-- شبكة الشركات -->
+<section class="companies-grid">
+ <div class="company-card">
+      <img src="home/photon_smart_logo.jpg" alt="photon Smart">
+   <p>Welcome to Photon Smart, where innovation meets convenience. We are an Egypt-based company 
+    specializing in manufacturing automation solutions for Public Buildings and Smart Solutions for 
+    Homes. 
+    Everything is done in-house at Photon including: Hardware Design, Embedded Software, IoT Cloud 
+    infrastructure and Mobile App.
+    At Photon, our vision is to redefine smart buildings globally, making energy-efficient, high-quality 
+    systems accessible and affordable for all. A few years ago, it was hard to imagine that all phones 
+     would be smart.</p>
+      <a href="https://www.linkedin.com/company/photon-smart/about/" target="_blank" class="linkedin-link">
+        <i class="fab fa-linkedin"></i> Photon Smart 
+      </a>
+    </div>
+
+    <!-- الشركة الثانية -->
+    <div class="company-card">
+      <img src="home/atomssillicon_logo.jpg" alt="Atoms">
+      <p>Atoms makes IC validation testing quick and easy using AI-driven bench automation tool. (No Code 
+needed). Atoms help companies with their chip validation using AI. Atoms automate integrated 
+circuit testing process which takes months/hundred thousands of dollars. Atoms is an online 
+platform which engineers can go throw simple steps and setup to automate their whole test.</p>
+      <a href="https://www.linkedin.com/company/testflowai/" target="_blank" class="linkedin-link">
+        <i class="fab fa-linkedin"></i> Atoms
+      </a>
+    </div>
+
+    <!-- الشركة الثالثة -->
+    <div class="company-card">
+      <img src="home/nfrtix_logo.jpg" alt="nfrti X">
+      <p>Rotating equipment fault deteXion, diagnostiX to identify and isolate the fault, and prognostiX to 
+estimate equipment remaining life before failure; in addition to industrial AIoT analytiX at large are 
+encapsulated in the X. X further entails abundance of meanings in mathematiX and technology. 
+MathematiX, the cradle of Life, maintains order and prevents chaos; technology is the key to unlock 
+its potential.</p>
+      <a href="https://www.linkedin.com/company/nfrtix/" target="_blank" class="linkedin-link">
+        <i class="fab fa-linkedin"></i> nfrti X
+      </a>
+    </div>
+ <!-- الشركة الرابعة -->
+   <div class="company-card">
+      <img src="home/seitech_solutions_eg_logo.jpg" alt="SEITech Solutions">
+      <p>SEITech Solutions is a technology firm focused on Industry 4.0 Solutions for Industrial 
+Applications, and Embedded Hardware and Software development for Automotive 
+Industry.
+Our services, products and solutions targets both the industrial and Automotive sector. the 
+company provides the certified expertise to support and serve its customers.</p>
+      <a href="https://www.linkedin.com/company/seitech-solutions-eg/" target="_blank" class="linkedin-link">
+        <i class="fab fa-linkedin"></i> SEITech Solutions
+      </a>
+    </div>
+   <!-- الشركة الخامسة -->
+     <div class="company-card">
+      <img src="home/fortecegypt_logo.jpg" alt="Fortec Egypt">
+      <p>We have the solution for your project! As a specialist in embedded, displays and touch, we 
+offer you comprehensive support in all project phases. Our goal is a system that is 
+optimally tailored to your application – whether standard or customer-specific.</p>
+      <a href="https://www.linkedin.com/company/fortecegypt/" target="_blank" class="linkedin-link">
+        <i class="fab fa-linkedin"></i> Fortec Egypt
+      </a>
+    </div>
+   <!-- الشركة الستة -->
+     <div class="company-card">
+      <img src="home/egyrobo_robotics_logo.jpg" alt="Egyrobo for robotic systems S.A.E.">
+      <p>EgyRobo is the first and the sole robotic system integrator company allover Egypt.
+Custom-made solutions for your purpose. Customize Robots to your needs. Bring higher 
+productivity, higher quality and lower costs. Robots will become your ideal industrial 
+partner. The technical department is the partner for all present and future cooperation.</p>
+      <a href="https://www.linkedin.com/company/egyrobo-robotics/about/" target="_blank" class="linkedin-link">
+        <i class="fab fa-linkedin"></i> Egyrobo for robotic systems S.A.E.
+      </a>
+    </div>
+  <!-- الشركة السبعة -->
+    <div class="company-card">
+      <img src="home/1630613785496.jpg" alt="Master Micro">
+      <p>Master Micro provides EDA solutions and professional training and consulting services in 
+the field of microelectronics</p>
+      <a href="https://www.linkedin.com/company/master-micro/" target="_blank" class="linkedin-link">
+        <i class="fab fa-linkedin"></i> Master Micro
+      </a>
+    </div>
+   <!-- الشركة الثامنة -->
+     <div class="company-card">
+      <img src="home/efabless_logo.jpg" alt="Efabless Corporation Egypt">
+      <p>Efabless enables non-hardware experts to create the electronics required for intelligent, 
+connected products. Efabless offers a unique process where users can rapidly, cost-effectively and easily create electronics from community-developed building blocks and 
+open design patterns, called templates.</p>
+      <a href="https://www.linkedin.com/company/efabless/" target="_blank" class="linkedin-link">
+        <i class="fab fa-linkedin"></i> Efabless Corporation Egypt
+      </a>
+    </div>
+   <!-- الشركة التاسعة -->
+     <div class="company-card">
+      <img src="home/mabrains_logo.jpg" alt="Mabrains">
+      <p>Mabrains is an AI company using cutting edge technologies to deliver AI solutions for 
+several clients in diverse domains including: Electrical Engineering, Computer Vision, 
+Financial Analysis and Others. Mabrains has a major focus on the applications of AI in Chip 
+Design and Manufacturing.
+Mabrains' vision is to build AI systems and solutions that delivers a performance that is on 
+bar with human level intelligence both in specific domains and general intelligence.</p>
+      <a href="https://www.linkedin.com/company/mabrains/" target="_blank" class="linkedin-link">
+        <i class="fab fa-linkedin"></i> Mabrains
+      </a>
+    </div>
+   <!-- الشركة العاشرة -->
+     <div class="company-card">
+      <img src="home/1630519839470.jpg" alt="Pearl Semiconductor">
+      <p>Pearl Semiconductor is a fabless semiconductor company specializing in Reference 
+Clocks and Timing ICs. As a Si-Ware Systems spin-off, Pearl inherited more than 16 years 
+of experience in the reference clock industry accumulating 25+ patents and a wealth of IP 
+in programmable temperature-compensated all silicon CMOS/MEMS reference clock 
+generators and high performance Sigma-Delta Fractional-N PLLs</p>
+      <a href="https://www.linkedin.com/company/pearlsemi/" target="_blank" class="linkedin-link">
+        <i class="fab fa-linkedin"></i> Pearl Semiconductor
+      </a>
+    </div>
+   <!-- الشركة 11ة -->
+     <div class="company-card">
+      <img src="home/1631337611516.jpg" alt="Si-Vision LLC">
+      <p>Si-Vision is a leading IP provider of high-performance, low-power radio frequency 
+intellectual property (RF IP). Si-Vision solutions include Bluetooth low energy radio, low 
+power Zigbee radio and other low power wireless radios. Si-Vision products deliver what we 
+believe is an industry-leading combination of performance and monolithic integration, and 
+target a broad range of applications serving consumers electronics, HIDs, smart meters, 
+industrial mobile wireless devices, and generally wireless markets.</p>
+      <a href="https://www.linkedin.com/company/si-vision/" target="_blank" class="linkedin-link">
+        <i class="fab fa-linkedin"></i> Si-Vision LLC
+      </a>
+    </div>
+   <!-- الشركة 12ة -->
+     <div class="company-card">
+      <img src="home/1713084568051.jpg" alt="Insspectrum">
+      <p>Insspectrum is a company specialized in the design and implementation of RF/Analog and 
+mixed-signal integrated circuits for wireless communications. Insspectrum is also 
+specialized in the design and implementation of Artificial Intelligence and Deep Learning 
+digital circuit for the purpose of analyzing and classifying RF signals.</p>
+      <a href="https://www.linkedin.com/company/insspectrum/" target="_blank" class="linkedin-link">
+        <i class="fab fa-linkedin"></i> Insspectrum
+      </a>
+    </div>
+   <!-- الشركة 13ة -->
+     <div class="company-card">
+      <img src="home/mipex_llc_logo.jpg" alt="Mixel Egypt">
+      <p>Mixel is a leading provider of mixed-signal mobile IPs. We offer a wide portfolio of high-performance mixed-signal connectivity solutions. Mixel mission is to provide our 
+customers and partners with outstanding mixed-signal, silicon-proven IP cores, creating in 
+the process a differentiating technology that sets your products apart. Mixel IPs have been 
+integrated into many of today’s most exciting applications, such as mobile platforms, 
+automotive, IoT, VR, and wearables, among many others.</p>
+      <a href="https://www.linkedin.com/company/mipex-llc/" target="_blank" class="linkedin-link">
+        <i class="fab fa-linkedin"></i> Mixel Egypt
+      </a>
+    </div>
+   <!-- الشركة 14ة -->
+     <div class="company-card">
+      <img src="home/lotus_microsystems_logo.jpg" alt="Lotus Microsystems">
+      <p>Lotus Microsystems is a fabless manufacturer of highly-integrated power converters for 
+applications with a need for miniaturization of platform power management and delivery 
+system. Based on a patented silicon interposer technology, Lotus Microsystems offers 
+power management solutions that serve the current demand for higher power density and 
+superior thermal performance in feature-rich electronic devices.</p>
+      <a href="https://www.linkedin.com/company/lotus-microsystems/" target="_blank" class="linkedin-link">
+        <i class="fab fa-linkedin"></i> Lotus Microsystems
+      </a>
+    </div>
+   <!-- الشركة 15ة -->
+     <div class="company-card">
+      <img src="home/1747194527553.jpg" alt="MEMSVision">
+      <p>MEMS VISION is a leading sensors, MEMS, and semiconductor company that develops and 
+produces miniature, very high-quality smart sensors and electronics that enable Internet of 
+Things (IoT) applications for mobile, wearables, automotive, buildings automation, medical, 
+industrial, and consumer markets</p>
+      <a href="https://www.linkedin.com/company/mems-vision/" target="_blank" class="linkedin-link">
+        <i class="fab fa-linkedin"></i> MEMSVision
+      </a>
+    </div>
+   <!-- الشركة 16ة -->
+     <div class="company-card">
+      <img src="home/1631323997656.jpg" alt="Axxcelera Egypt">
+      <p>Axxcelera Egypt, is a subsidary of Axxcelera Broadband Wireless. Axxcelera Egypt was
+established in Maadi, Cairo in June of 2011. Its mission is to operate a research and 
+development center in the wireless communication domain in support of Axxcelera’s LTE 
+small cell basestation products. The engineers and scientists Axxcelera Egypt work on the 
+most advanced technical challenges in the wireless communications field. 
+They develop models for the transmit and receive chains of the communication system, 
+and design innovative algorithms and software to deal with the unfavorable transmission 
+conditions inherent in the wireless communication channel. They also design software and 
+algorithms to support autonomous deployment of LTE basestations. All of Axxcelera 
+Egypt’s solutions are implemented as embedded software on sophisticated hardware 
+platforms capable of handling the throughput and access requirements of the most 
+advanced wireless networks.</p>
+      <a href="https://www.linkedin.com/company/axxcelera-egypt/" target="_blank" class="linkedin-link">
+        <i class="fab fa-linkedin"></i> Axxcelera Egypt
+      </a>
+    </div>
+   <!-- الشركة 17ة -->
+     <div class="company-card">
+      <img src="home/infinilink_logo.jpg" alt="Infinilink">
+      <p>InfiniLink is a semiconductor startup building chips focused on high-speed connectivity. We are 
+developing ultra-high-speed SerDes and Optical Transceiver chiplets using the latest Silicon and SiPhotonics technologies.
+InfiniLink was founded by semiconductor industry veterans, who bring expertise in SerDes, Optical 
+transceivers, RF, as well as a variety of Analog/Mixed-signal domains from concept to production.</p>
+      <a href="https://www.linkedin.com/company/infinilink/" target="_blank" class="linkedin-link">
+        <i class="fab fa-linkedin"></i> Infinilink
+      </a>
+    </div>
+   <!-- الشركة 18ة -->
+     <div class="company-card">
+      <img src="home/1655145033541.jpg" alt="ElSquare">
+      <p>A leading Manufacturing & Consultancy firm that is specialized in developing , 
+manufacturing, system integration, architecture and implementation of industry 4.0+ , 
+agriculture 4.0+, energy4.0, and fintech solutions. ElSquare solutions are based on our 
+patented technologies in IoT, AI, and AR platforms.</p>
+      <a href="https://www.linkedin.com/company/elsquare-esquares-geniesys/" target="_blank" class="linkedin-link">
+        <i class="fab fa-linkedin"></i> ElSquare
+      </a>
+    </div>
+
+
+</section>
+
+<!-- الفوتر -->
+<footer>
+  © 2025 Imhotep Innovation & Development Center
+  <small>This website was developed as part of an internship at ITIDA</small>
+  <small>Developed by Seif EL-Den Tamer</small>
+  <small>
+      <a href="https://www.linkedin.com/in/seif-el-den-tamer-342001347" target="_blank">
+        <i class="fab fa-linkedin" style="color:#004285; font-size:16px; margin-right:5px;"></i>
+        Seif EL-Den Tamer
+      </a>
+    </small>
+</footer>
+
+</body>
+</html>
